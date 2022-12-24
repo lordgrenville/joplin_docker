@@ -1,6 +1,6 @@
 FROM node:17
-RUN apt update
-RUN apt install -y libvips python neovim
+RUN apt-get update
+RUN apt-get install -y libvips python neovim
 RUN npm install -g sharp
 RUN npm install -g sqlite3
 RUN npm install -g joplin
