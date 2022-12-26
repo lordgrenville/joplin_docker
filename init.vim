@@ -1,5 +1,4 @@
-
-setlocal nolist nohls wrap wrapmargin=12 linebreak nocursorline foldcolumn=10 spell spelllang=en_gb noshowmatch iskeyword+=' nocindent
+setlocal nolist nohls wrap linebreak nocursorline spell spelllang=en_gb noshowmatch iskeyword+=' nocindent
 " if text is bigger than window show it, not a few lines of @ @ @
 setlocal display=lastline
 
@@ -22,9 +21,7 @@ set autowrite " if a file changes on disk, reload it
 set cindent " smart newline autoindenting for languages
 set expandtab
 set hidden "means hidden buffers are loaded into memory, so no need to save
-set mouse=a " resisted for a while but now this is pretty useful :)
 set nocompatible  " no need for vi compatibility in 2020 AD
-set nofoldenable   " i'll fold my code if i want to, thank you very much
 set number relativenumber  " current line number + rel for others
 set ruler
 set t_Co=256
@@ -48,7 +45,6 @@ set incsearch " jump to closest instance during search
 set ignorecase " case insensitive search
 set smartcase " if using a capital, search becomes case sensitive
 set scrolloff=3 " number of lines to keep above and below the cursor
-silent! colorscheme snazzy
 " i do this a lot and s is totally useless
 nnoremap <silent> s :noh<CR>
 " use tab to switch between parentheses!
@@ -59,7 +55,6 @@ syntax enable
 set termguicolors
 let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
 let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
-silent! colorscheme snazzy " if you don't find it, I don't want to hear you whine about it
 
 filetype plugin indent on
 
@@ -92,10 +87,6 @@ command! FZFMru call fzf#run({
 \  'sink':    'e',
 \  'options': '-m -x +s',
 \  'down':    '40%'})
-nmap <C-_> gcc j
-" make vim-comment more like pycharm - note can't be nore since gcc is recursive
-" actually this is Ctrl-/ (similar to Pycharm's Cmd-/, but can't use command
-" in terminal) but for some weird reason must be like this https://stackoverflow.com/a/9051932/6220759
 
 nnoremap <leader>a [s\s
 
@@ -123,11 +114,14 @@ call plug#begin('~/.vim/plugged')
     Plug 'junegunn/goyo.vim'
     Plug 'junegunn/limelight.vim'
     Plug 'lervag/vimtex'
+    Plug 'connorholyday/vim-snazzy'
     Plug 'preservim/nerdtree'
     Plug 'tmhedberg/SimpylFold'
     Plug 'tpope/vim-commentary'
     Plug 'neoclide/coc.nvim', {'branch': 'release'}
 call plug#end()
+
+silent! colorscheme snazzy
 
 " Use tab for trigger completion with characters ahead and navigate.
 " NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
