@@ -109,16 +109,15 @@ augroup vimrc_help
 augroup END
 
 call plug#begin('~/.vim/plugged')
+    Plug 'connorholyday/vim-snazzy'
     Plug 'dense-analysis/ale'
     Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
     Plug 'junegunn/goyo.vim'
     Plug 'junegunn/limelight.vim'
-    Plug 'lervag/vimtex'
-    Plug 'connorholyday/vim-snazzy'
-    Plug 'preservim/nerdtree'
+    Plug 'neoclide/coc.nvim', {'branch': 'release'}
     Plug 'tmhedberg/SimpylFold'
     Plug 'tpope/vim-commentary'
-    Plug 'neoclide/coc.nvim', {'branch': 'release'}
+    Plug 'tpope/vim-surround'
 call plug#end()
 
 silent! colorscheme snazzy
