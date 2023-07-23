@@ -118,6 +118,7 @@ call plug#begin('~/.vim/plugged')
     Plug 'tmhedberg/SimpylFold'
     Plug 'tpope/vim-commentary'
     Plug 'tpope/vim-surround'
+    Plug 'gabenespoli/vim-mutton'
 call plug#end()
 
 silent! colorscheme snazzy
