@@ -1,6 +1,10 @@
 setlocal nolist nohls wrap linebreak nocursorline spell spelllang=en_gb noshowmatch iskeyword+=' nocindent
 " if text is bigger than window show it, not a few lines of @ @ @
 setlocal display=lastline
+set mouse=v
+set updatetime=300
+set signcolumn=yes
+set infercase
 
 " move between wrapped lines one at a time (yeah yeah I use the arrow keys...)
 nnoremap <buffer> <Up> gk
@@ -14,6 +18,8 @@ nnoremap <buffer> E e
 nnoremap <buffer> e E
 nnoremap <buffer> b B
 nnoremap <buffer> b B
+nnoremap j gj
+nnoremap k gk
 
 set autoindent " copy indent from previous when starting new line
 set autoread " when a file changes outside vim, change it inside vim as well
@@ -82,6 +88,7 @@ nnoremap N Nzzzv
 " Leader
 let mapleader = " "
 nnoremap <Leader><Leader> :FZFMru<CR>
+nnoremap <Leader>f [sz=
 command! FZFMru call fzf#run({
 \  'source':  v:oldfiles,
 \  'sink':    'e',
@@ -110,7 +117,7 @@ augroup END
 
 call plug#begin('~/.vim/plugged')
     Plug 'connorholyday/vim-snazzy'
-    Plug 'dense-analysis/ale'
+    " Plug 'dense-analysis/ale'
     Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
     Plug 'junegunn/goyo.vim'
     Plug 'junegunn/limelight.vim'
@@ -132,7 +139,21 @@ inoremap <silent><expr> <TAB>
       \ coc#refresh()
 inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
 
+" function! s:goyo_enter()
+"   setlocal nolist nohls wrap linebreak nocursorline spell spelllang=en_gb noshowmatch iskeyword+=' nocindent tw=70
+"   " cindent messes up indentation, tw of window size (80) is too long
+" endfunction
 function! s:goyo_enter()
-  setlocal nolist nohls wrap linebreak nocursorline spell spelllang=en_gb noshowmatch iskeyword+=' nocindent tw=70
-  " cindent messes up indentation, tw of window size (80) is too long
+  Limelight
 endfunction
+
+function! s:goyo_leave()
+  Limelight!
+  " ...
+endfunction
+
+au BufWinLeave * mkview
+au BufWinEnter * silent! loadview
+
+autocmd! User GoyoEnter nested call <SID>goyo_enter()
+autocmd! User GoyoLeave nested call <SID>goyo_leave()
